@@ -104,6 +104,25 @@ namespace DataStructuresAndAlgorithmsSpecialization.DataStructures
             return orderedKeys;
         }
     }
+    
+    //Time Complexity: O(Size)
+    public T[] PostorderTraversal()
+    {
+        int arrayIndex = 0;
+        return PostorderTraversal(root, new T[Size], ref arrayIndex);
+    }
+    public T[] PostorderTraversal(BSTreeNode<T> node, T[] orderedKeys, ref int arrayIndex)
+    {
+        if (node == null)
+        { return orderedKeys; }
+
+        PostorderTraversal(node.Left, orderedKeys, ref arrayIndex);
+        PostorderTraversal(node.Right, orderedKeys, ref arrayIndex);
+
+        orderedKeys[arrayIndex] = node.Keys.First.Value;
+        arrayIndex++;
+        return orderedKeys;
+    }
 
     public sealed class BSTreeNode<T> where T : IComparable<T>
     {
